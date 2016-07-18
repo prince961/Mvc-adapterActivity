@@ -1,41 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="wrap_content"
 
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/item_image"
-        android:layout_gravity="center_horizontal" />
+    android:columnCount="5"
+    android:rowCount="5">
 
-    <TextView
+
+        <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:id="@+id/item_title" />
+        android:id="@+id/addToCart"
+        android:text="Add to cart"
+        android:layout_row="1"
+        android:layout_column="0" />
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/item_image"
+            android:layout_gravity="center_horizontal"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_columnSpan="5" />
+
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="title"
+            android:textSize="15sp"
+            android:id="@+id/item_title"
+            android:layout_row="3"
+            android:layout_column="0" />
 
 
     <TextView
         android:layout_width="135dp"
         android:layout_height="wrap_content"
-        android:id="@+id/item_price1" />
+        android:id="@+id/item_price1"
+        android:text="price"
+        android:layout_row="3"
+        android:layout_column="1"
+        android:layout_columnWeight="0.1" />
 
-    <Button
+    <LinearLayout
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/addToCart"
-        android:text="Add to cart"
+        android:layout_row="3"
+        android:layout_column="4"
+        android:paddingLeft="10dp"
+        android:orientation="horizontal">
 
-        />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/addBtn"
+            android:src="@drawable/btn_add"
+            android:clickable="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="0"
+            android:id="@+id/tvQuantity"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/reduceBtn"
+            android:src="@drawable/btn_reduce"
+            android:clickable="true" />
+    </LinearLayout>
 
 
+</GridLayout>
 
-
-
-
-
-
-</LinearLayout>

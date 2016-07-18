@@ -32,11 +32,38 @@ public class AdapterTry extends ArrayAdapter<ModelProducts> {
         if(convertView == null){
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(layout,parent,false);
-            ViewHolder viewHolder = new ViewHolder();
+            final ViewHolder viewHolder = new ViewHolder();
             viewHolder.thumbnail = (ImageView) convertView.findViewById(R.id.item_image);
+
             viewHolder.title = (TextView) convertView.findViewById(R.id.item_title);
             viewHolder.price = (TextView) convertView.findViewById(R.id.item_price1);
             viewHolder.button = (Button) convertView.findViewById(R.id.addToCart);
+            viewHolder.title.setText(getItem(position).getProductName());
+            viewHolder.thumbnail.setImageResource(R.mipmap.ic_launcher);
+            viewHolder.addBtn = (ImageView)convertView.findViewById(R.id.addBtn);
+            viewHolder.reduceBtn = (ImageView) convertView.findViewById(R.id.reduceBtn);
+            viewHolder.quantity = (TextView) convertView.findViewById(R.id.tvQuantity);
+            //viewHolder.quantity.setText(0);
+            viewHolder.price.setText(Integer.toString(getItem(position).getProductPrice()));
+            viewHolder.addBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String StringQuantity = viewHolder.quantity.getText().toString();
+                    int quantity = Integer.parseInt(StringQuantity);
+                    int newQuant = quantity+1;
+                    viewHolder.quantity.setText(Integer.toString(newQuant));
+                }
+            });
+            viewHolder.reduceBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String StringQuantity = viewHolder.quantity.getText().toString();
+                    int quantity = Integer.parseInt(StringQuantity);
+                    if (quantity>0){
+                    int newQuant = quantity-1;
+                    viewHolder.quantity.setText(Integer.toString(newQuant));}
+                }
+            });
             viewHolder.button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -47,6 +74,7 @@ public class AdapterTry extends ArrayAdapter<ModelProducts> {
         }
         else {
             mainViewHolder = (ViewHolder) convertView.getTag();
+            //mainViewHolder.price.setText(Integer.toString(28));
             //mainViewHolder.title.setText(getItem(position).getProductName());
             //mainViewHolder.price.setText(getItem(position).getProductPrice());
         }
@@ -59,5 +87,8 @@ public class AdapterTry extends ArrayAdapter<ModelProducts> {
         Button button;
         TextView title;
         TextView price;
+        ImageView addBtn;
+        ImageView reduceBtn;
+        TextView quantity;
     }
 }
