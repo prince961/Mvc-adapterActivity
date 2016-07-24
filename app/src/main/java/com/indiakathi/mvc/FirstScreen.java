@@ -347,7 +347,7 @@ public class FirstScreen extends Activity {
 
                         HashMap<String,Object> selectedProduct =(HashMap<String, Object>) adapter.getItem(position);
 
-                        aController.getCart().setProducts(selectedProduct);
+                        //aController.getCart().setProducts(selectedProduct);
 
                         String toastText = "item has been added to cart"+position;
                         Toast.makeText(getBaseContext(), toastText, Toast.LENGTH_SHORT).show();

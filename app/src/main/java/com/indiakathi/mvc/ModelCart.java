@@ -8,15 +8,15 @@ import java.util.HashMap;
  */
 public class ModelCart{
 
-    private ArrayList<HashMap<String,Object>> cartProducts = new ArrayList<HashMap<String, Object>>();
+    private ArrayList<ModelProducts> cartProducts = new ArrayList<ModelProducts>();
 
 
-    public HashMap<String, Object> getProducts(int pPosition) {
+    public ModelProducts getProducts(int pPosition) {
 
         return cartProducts.get(pPosition);
     }
 
-    public void setProducts(HashMap<String,Object> Products) {
+    public void setProducts(ModelProducts Products) {
 
         cartProducts.add(Products);
 
@@ -32,6 +32,10 @@ public class ModelCart{
 
         return cartProducts.contains(aProduct);
 
+    }
+
+    public void removeProduct(ModelProducts modelProducts){
+        cartProducts.remove(modelProducts);
     }
 
 }

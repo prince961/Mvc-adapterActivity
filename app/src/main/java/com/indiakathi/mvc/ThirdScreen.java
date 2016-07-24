@@ -25,9 +25,9 @@ public class ThirdScreen extends Activity {
         for(int i=0;i<cartSize;i++)
         {
             //Get product details
-            String pName 	= (String) aController.getCart().getProducts(i).get("title");
-            int pPrice   	= (int) aController.getCart().getProducts(i).get("price");
-            String pDisc   	= (String) aController.getCart().getProducts(i).get("details");
+            String pName 	= (String) aController.getCart().getProducts(i).getProductName();
+            int pPrice   	= (int) aController.getCart().getProducts(i).getProductPrice();
+            String pDisc   	= (String) aController.getCart().getProducts(i).getProductDesc();
 
             showString += "\n\nProduct Name : "+pName+"\n"+
                     "Price : "+pPrice+"\n"+

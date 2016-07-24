@@ -1,9 +1,11 @@
 package com.indiakathi.mvc;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
 
 import org.json.JSONObject;
@@ -35,6 +37,11 @@ public class AdapterActivityTry extends AppCompatActivity {
         DownloadTask downloadTask = new DownloadTask();
         downloadTask.execute(strUrl);
 
+    }
+
+    public void goToCart(View view) {
+        Intent intent = new Intent(this, SecondScreen.class);
+        startActivity(intent);
     }
 
     private class DownloadTask extends AsyncTask<String, Void, String> {
@@ -108,7 +115,7 @@ public class AdapterActivityTry extends AppCompatActivity {
 
             aController.addProductList(countries);
 
-            return new AdapterTry(getBaseContext(), R.layout.item_list, countries);
+            return new AdapterTry(getBaseContext(), R.layout.item_list, countries,aController);
         }
 
         @Override

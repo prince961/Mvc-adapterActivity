@@ -8,11 +8,12 @@ public class ModelProducts {
     private String productDesc;
     private int productPrice;
     private String imageLink;
+    private int productQuantity;
 
-    public ModelProducts(String productName, String productDesc, int productPrice, String imageLink)
+    public ModelProducts(String productName, String productDesc, int productPrice, String imageLink,int productQuantity)
     {
         this.productName  = productName;
-
+        this.productQuantity = productQuantity;
         this.productDesc  = productDesc;
         this.productPrice = productPrice;
         this.imageLink    = imageLink;
@@ -41,5 +42,11 @@ public class ModelProducts {
         return imageLink;
     }
 
+    public int getProductQuantity() {
+        return productQuantity;
+    }
 
+    public void setProductQuantity(int productQuantity) {
+        this.productQuantity = productQuantity;
+    }
 }
