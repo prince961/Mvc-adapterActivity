@@ -40,7 +40,7 @@ public class AdapterActivityTry extends AppCompatActivity {
     }
 
     public void goToCart(View view) {
-        Intent intent = new Intent(this, SecondScreen.class);
+        Intent intent = new Intent(this, CartActivity.class);
         startActivity(intent);
     }
 

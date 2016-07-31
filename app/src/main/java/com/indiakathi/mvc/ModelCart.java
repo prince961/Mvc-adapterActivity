@@ -38,4 +38,6 @@ public class ModelCart{
         cartProducts.remove(modelProducts);
     }
 
+    public ArrayList<ModelProducts> getCartProducts(){return cartProducts;}
+
 }
