@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
-        android:id="@+id/textView4"
+        android:id="@+id/totalAmount"
         android:layout_row="0"
         android:layout_column="1" />
 

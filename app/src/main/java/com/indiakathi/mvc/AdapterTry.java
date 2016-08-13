@@ -28,6 +28,8 @@ public class AdapterTry extends ArrayAdapter<ModelProducts> {
         this.controller = controller;
     }
 
+
+
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder mainViewHolder = null;
@@ -45,6 +47,7 @@ public class AdapterTry extends ArrayAdapter<ModelProducts> {
             viewHolder.addBtn = (ImageView)convertView.findViewById(R.id.addBtn);
             viewHolder.reduceBtn = (ImageView) convertView.findViewById(R.id.reduceBtn);
             viewHolder.quantity = (TextView) convertView.findViewById(R.id.tvQuantity);
+            viewHolder.quantity.setText(Integer.toString(getItem(position).getProductQuantity()));
             viewHolder.price.setText(Integer.toString(getItem(position).getProductPrice()));
             viewHolder.addBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -53,7 +56,7 @@ public class AdapterTry extends ArrayAdapter<ModelProducts> {
                     int quantity = Integer.parseInt(StringQuantity);
                     int newQuant = quantity+1;
                     productList.get(position).setProductQuantity(newQuant);
-                    viewHolder.quantity.setText(Integer.toString(newQuant));
+                    viewHolder.quantity.setText(Integer.toString(controller.getProducts(position).getProductQuantity()));
                     if(quantity == 0){ controller.getCart().setProducts(productList.get(position));}
 
                 }
@@ -67,7 +70,7 @@ public class AdapterTry extends ArrayAdapter<ModelProducts> {
                     int newQuant = quantity-1;
                         if(newQuant == 0){controller.getCart().removeProduct(productList.get(position));}
                     productList.get(position).setProductQuantity(newQuant);
-                    viewHolder.quantity.setText(Integer.toString(newQuant));
+                    viewHolder.quantity.setText(Integer.toString(controller.getProducts(position).getProductQuantity()));
                     }
 
 
