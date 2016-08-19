@@ -20,12 +20,14 @@ public class CartListAdapter  extends ArrayAdapter<ModelProducts>{
     private int layout;
     private List<ModelProducts> productList;
     private Controller controller;
+    TextView totalAmountTV;
 
-    public CartListAdapter(Context context, int resource, List<ModelProducts> productList,Controller controller) {
+    public CartListAdapter(Context context, int resource, List<ModelProducts> productList,Controller controller,TextView totalAmount) {
         super(context, resource, productList);
         this.layout = resource;
         this.productList = productList;
         this.controller = controller;
+        this.totalAmountTV = totalAmount;
     }
 
     @Override
@@ -97,7 +99,9 @@ public class CartListAdapter  extends ArrayAdapter<ModelProducts>{
                 //int quantity = Integer.parseInt(StringQuantity);
                 int newQuant = quantity+1;
                 productList.get(position).setProductQuantity(newQuant);
+                controller.getCart().getCartProducts().get(position).setProductQuantity(newQuant);
                 finalMainViewHolder.quantity.setText(Integer.toString(newQuant));
+                refreshTotalAmountTv();
                 //notifyDataSetChanged();
                 //if(quantity == 0){ controller.getCart().setProducts(productList.get(position));}
 
@@ -110,11 +114,17 @@ public class CartListAdapter  extends ArrayAdapter<ModelProducts>{
                 //int position1 = position;
                 //productList.remove(productList.get(position));
                 //controller.getCart().removeProduct(tempProduct);
-                productList.remove(productList.get(position));
-                CartListAdapter.this.notifyDataSetChanged();
+                // productList.remove(productList.get(position));
+                //controller.getCart().getCartProducts().get(position).setProductQuantity(0);
+                //CartListAdapter.this.notifyDataSetChanged();
+                //refreshTotalAmountTv();
                 //productList.clear();
                 //productList.addAll(controller.getCart().getCartProducts());
                 //notifyDataSetChanged();
+                ModelProducts theProduct = controller.getCart().getProducts(position);
+                controller.getCart().removeProduct(theProduct);
+                CartListAdapter.this.notifyDataSetChanged();
+                refreshTotalAmountTv();
             }
         });
 
@@ -123,15 +133,24 @@ public class CartListAdapter  extends ArrayAdapter<ModelProducts>{
             @Override
             public void onClick(View v) {
                 //String StringQuantity = productList.get(position).getProductQuantity();
+                ModelProducts theProduct = controller.getCart().getProducts(position);
                 int quantity = productList.get(position).getProductQuantity();
-                if (quantity>0){
-                    int newQuant = quantity-1;
+
+                if (quantity>1) {
+                    int newQuant = quantity - 1;
                     //ModelProducts selectedProduct = productList.get(position);
-                    if(newQuant == 0){controller.getCart().removeProduct(productList.get(position));}
+                    //if(newQuant == 0){controller.getCart().removeProduct(productList.get(position));}
                     productList.get(position).setProductQuantity(newQuant);
                     finalMainViewHolder1.quantity.setText(Integer.toString(newQuant));
+                    refreshTotalAmountTv();
                 }
-
+                if (quantity == 1){
+                    //productList.remove(theProduct);
+                    //controller.getCart().getCartProducts().get(position).setProductQuantity(0);
+                    controller.getCart().removeProduct(theProduct);
+                    CartListAdapter.this.notifyDataSetChanged();
+                    refreshTotalAmountTv();
+                }
             }
         });
         //mainViewHolder.title.setText(getItem(position).getProductName());
@@ -150,5 +169,19 @@ public class CartListAdapter  extends ArrayAdapter<ModelProducts>{
         ImageView reduceBtn;
         TextView quantity;
         ImageView deleteFromCartIv;
+    }
+
+    private void refreshTotalAmountTv() {
+        Double totalAmount = 0.0;
+        int numberProducts = productList.size();
+        for (int i = 0; i < numberProducts; i++) {
+            int pQuantity = productList.get(i).getProductQuantity();
+            int pPrice = productList.get(i).getProductPrice();
+            double pAmountI = pPrice * pQuantity;
+
+            totalAmount = totalAmount + pAmountI;
+        }
+
+        totalAmountTV.setText(Double.toString(totalAmount));
     }
 }

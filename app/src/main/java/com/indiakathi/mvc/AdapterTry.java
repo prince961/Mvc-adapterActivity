@@ -52,8 +52,9 @@ public class AdapterTry extends ArrayAdapter<ModelProducts> {
             viewHolder.addBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String StringQuantity = viewHolder.quantity.getText().toString();
-                    int quantity = Integer.parseInt(StringQuantity);
+                    //String StringQuantity = viewHolder.quantity.getText().toString();
+                    //int quantity = Integer.parseInt(StringQuantity);
+                    int quantity = controller.getProducts(position).getProductQuantity();
                     int newQuant = quantity+1;
                     productList.get(position).setProductQuantity(newQuant);
                     viewHolder.quantity.setText(Integer.toString(controller.getProducts(position).getProductQuantity()));
